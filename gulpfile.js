@@ -1,18 +1,18 @@
 var gulp         = require('gulp'),
     browserSync  = require('browser-sync'),
     sass         = require('gulp-sass');
-    pug         = require('gulp-pug');
-
+    pug          = require('gulp-pug');
+    notify       = require('gulp-notify')
 gulp.task('sass',function(){
    return gulp.src("app/sass/**/*.sass")
-       .pipe(sass())
+       .pipe(sass().on("error", notify.onError()))
        .pipe(gulp.dest('app/css'))
        .pipe(browserSync.reload({stream: true}))
 });
 
 gulp.task('pug',function(){
     return gulp.src("app/pug/**/*.pug")
-        .pipe(pug())
+        .pipe(pug().on("error", notify.onError()))
         .pipe(gulp.dest('app/html'))
         .pipe(browserSync.reload({stream: true}))
 });
